@@ -139,10 +139,21 @@ p {
   width: 50%;
 
   @media (max-width: 991px) {
-    margin: 0;
+    margin: 0 15px;
     padding: 0 0 66px;
     width: 100%;
   }
+}
+
+/* Form Elements */
+label {
+  &.choice {
+    margin-left: 8px;
+  }
+}
+
+input[type="text"] {
+  margin: 0 0 0 8px;
 }
 
 /* Page Footer */
