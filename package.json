@@ -1,0 +1,93 @@
+{
+  "name": "sample-react",
+  "version": "1.0.0",
+  "description": "A sample site using React.",
+  "author": "Helen Martch",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": "",
+  "entry point": "server.js",
+  "main": "src/js/app.js",
+  "engines": {
+    "node": "v6.9.5",
+    "npm": "3.10.10"
+  },
+  "config": {
+    "engine-strict": true
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "history": "^3.2.1",
+    "jquery": "^3.1.1",
+    "path": "^0.12.7",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2"
+  },
+  "devDependencies": {
+    "@songkick/injectassets": "^1.1.0",
+    "@songkick/replaceinfiles": "^1.1.6",
+    "babel-jest": "^18.0.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babelify": "7.3.0",
+    "browserify": "^14.0.0",
+    "clean-css": "^4.0.3",
+    "clean-css-cli": "^4.0.0",
+    "enzyme": "^2.7.1",
+    "hashmark": "^4.1.0",
+    "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
+    "node-sass": "^4.5.0",
+    "react-addons-test-utils": "^15.4.2",
+    "react-test-renderer": "^15.4.2",
+    "uglify-js": "^2.6.1",
+    "watchify": "^3.6.1"
+  },
+  "scripts": {
+    "prebuild:localhost": "rm -rf public && mkdir public",
+    "prebuild:prod": "rm -rf public && mkdir public",
+    "bundle:js": "mkdir public/js && NODE_ENV=production browserify -t babelify src/js/app.js -o public/js/bundle.js",
+    "minify:js": "uglifyjs public/js/bundle.js --compress warnings=false --mangle -o public/js/bundle.min.js && rm public/js/bundle.js",
+    "build:js": "npm run bundle:js && npm run minify:js",
+    "build:js-dev": "mkdir public/js && browserify -t babelify src/js/app.js -o public/js/bundle.js",
+    "bundle:css": "mkdir public/stylesheets && node-sass src/stylesheets/main.css.scss public/stylesheets/main.css",
+    "minify:css": "cleancss -o public/stylesheets/main.min.css public/stylesheets/main.css && rm public/stylesheets/main.css",
+    "build:css": "npm run bundle:css && npm run minify:css",
+    "build:css-dev": "npm run bundle:css",
+    "build:assets": "cp -r src/assets public",
+    "build:mark": "hashmark -c public -r -l 10 'assets/**/*.*' '{dir}/{name}-{hash}{ext}' | replaceinfiles -S -s 'public/*/*.{css,js}' -d '{dir}/{base}' && hashmark -s -c public -r -l 10 '**/*.{css,js}' '{dir}/{name}-{hash}{ext}'",
+    "build:html": "injectassets -s src/index_template.html -o public/index.html -d public -g '**/*.{ico,css,js};**/favicon/*.png'",
+    "watch:js": "watchify -t babelify src/js/app.js -o public/js/bundle.js",
+    "watch:css": "node-sass -w src/stylesheets/main.css.scss public/stylesheets/main.css",
+    "watch": "echo 'Will watch for changes...'; npm run watch:js & npm run watch:css",
+    "build:localhost": "for step in 'assets' 'js-dev' 'css-dev' 'html'; do npm run build:$step; done; echo 'Localhost dev build complete'",
+    "start:localhost": "echo 'Running server in localhost dev mode'; node server.js;",
+    "localhost": "npm run build:localhost && (npm run start:localhost & npm run watch)",
+    "build:prod": "for step in 'assets' 'js' 'css' 'mark' 'html'; do npm run build:$step; done; echo 'Prod build complete'",
+    "start:prod": "echo 'Running server in production mode'; NODE_ENV=production node server.js",
+    "prod": "npm run build:prod && npm run start:prod",
+    "test": "jest",
+    "test-dev": "jest -o"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/react-dom",
+      "node_modules/react-addons-test-utils",
+      "node_modules/jquery",
+      "node_modules/jquery-ui"
+    ],
+    "verbose": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/js/**/*.{js,jsx}",
+      "!src/js/app.js",
+      "!src/js/vendor/**"
+    ]
+  }
+}
