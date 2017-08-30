@@ -24,6 +24,6 @@ describe('<SubHead />', () => {
   it('renders a p tag with the expected text when the panel_topic is "movies"', () => {
     const _subhead = shallow(<SubHead panel_topic="movies"/>);
     expect(_subhead.find('p')).toHaveLength(1);
-    expect(_subhead.find('p').text()).toBe('Do you have a favorite movie?');
+    expect(_subhead.find('p').text()).toBe('Let\'s talk about movies.');
   });
 });
