@@ -8,8 +8,6 @@ class Page extends React.Component {
       <div className="pagecontent">
         <Panel
           panel_topic="intro" />
-        <Panel
-          panel_topic="movies" />
       </div>
     )
   }

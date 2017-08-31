@@ -17,7 +17,7 @@ describe('<Page />', () => {
     expect(_page.find('div.pagecontent')).toHaveLength(1);
   });
 
-  it('renders 2 <Panel /> components', () => {
-    expect(_page.find(Panel)).toHaveLength(2);
+  it('renders 1 <Panel /> components', () => {
+    expect(_page.find(Panel)).toHaveLength(1);
   });
 });
