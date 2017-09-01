@@ -1,5 +1,7 @@
 # sample-react
 
+NOTE: This repository is a work-in-progress.
+
 ## To use this repository
 1. Clone the repository
 
