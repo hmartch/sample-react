@@ -7,9 +7,9 @@ class SubHead extends React.Component {
         <p>Tell me about yourself.</p>
       );
     }
-    else if (this.props.panel_topic === 'movies') {
+    else if (this.props.panel_topic === 'result') {
       var subhead = (
-        <p>Let&apos;s talk about movies.</p>
+        <p>Since you let me save your answers, here&apos;s some info about your favorite movie.</p>
       );
     }
 

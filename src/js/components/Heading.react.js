@@ -10,8 +10,8 @@ class Heading extends React.Component {
         </span>
       );
     }
-    else if (this.props.panel_topic === 'movies') {
-      var heading = 'Movies.';
+    else if (this.props.panel_topic === 'result') {
+      var heading = 'Thanks!';
     }
 
     return (

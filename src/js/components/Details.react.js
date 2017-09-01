@@ -8,6 +8,11 @@ class Details extends React.Component {
     this.handleChoice = this.handleChoice.bind(this);
     this.handleMovieInput = this.handleMovieInput.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.doParentChangeFromChild = this.doParentChangeFromChild.bind(this);
+  }
+
+  doParentChangeFromChild(){ 
+    this.props.parentChange('result');
   }
 
   handleNameInput(selected) {
@@ -50,11 +55,12 @@ class Details extends React.Component {
         }
       }
     }
+    this.doParentChangeFromChild();
   }
 
   render() {
-    return (
-      <div className="details">
+    if (this.props.panel_topic === 'intro') {
+      var details = (
         <form>
           <div>
             <label>What is your name?
@@ -86,6 +92,17 @@ class Details extends React.Component {
             </div>
           ) : null}
         </form>
+      );
+    }
+    else if (this.props.panel_topic === 'result') {
+      var details = (
+        <p>Movie information</p>
+      );
+    }
+    
+    return (
+      <div className="details">
+        {details}
       </div>
     )
   }

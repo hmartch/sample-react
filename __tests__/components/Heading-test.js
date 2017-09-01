@@ -24,8 +24,8 @@ describe('<Heading />', () => {
     expect(_heading.find('h2').text()).toBe('Welcome.');
   });
 
-  it('renders the expected text when the panel_topic is "movies"', () => {
-    const _heading = shallow(<Heading panel_topic="movies"/>);
-    expect(_heading.find('h2').text()).toBe('Movies.');
+  it('renders the expected text when the panel_topic is "result"', () => {
+    const _heading = shallow(<Heading panel_topic="result"/>);
+    expect(_heading.find('h2').text()).toBe('Thanks!');
   });
 });
