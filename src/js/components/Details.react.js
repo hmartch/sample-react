@@ -35,9 +35,7 @@ class Details extends React.Component {
   }
 
   handleSave(selected) {
-    console.log('save to db here');
     var data = '{"name": "' + this.state.name + '", "moviename": "' + this.state.moviename + '"}';
-    console.log(data)
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:3000/visitors', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -95,8 +93,33 @@ class Details extends React.Component {
       );
     }
     else if (this.props.panel_topic === 'result') {
+      var xhr = new XMLHttpRequest();
+      var url = "https://api.themoviedb.org/3/search/movie?api_key=27512242d2dfd9e620e9bb476b4247a9&language=en-US&query=" + this.state.moviename + "&page=1&include_adult=false";
+      xhr.open('GET', url);
+      xhr.send();
+
+      xhr.onreadystatechange = function () {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 means successful
+        if (xhr.readyState === DONE) {
+          if (xhr.status === OK) {
+            var parsed = JSON.parse(xhr.responseText);
+            console.log(parsed.results[0]);
+            document.getElementById('movie-title').append(parsed.results[0].title);
+            document.getElementById('movie-descrip').append(parsed.results[0].overview);
+            document.getElementById('movie-poster').setAttribute('src', 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + parsed.results[0].poster_path);
+          } else {
+            console.log('Error: ' + xhr.status); // An error occurred during the request.
+          }
+        }
+      }
+
       var details = (
-        <p>Movie information</p>
+        <div>
+          <h3 id="movie-title"></h3>
+          <p id="movie-descrip"></p>
+          <img src="" id="movie-poster" />
+        </div>
       );
     }
     
