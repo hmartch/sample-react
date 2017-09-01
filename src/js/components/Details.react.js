@@ -3,7 +3,7 @@ import React from 'react';
 class Details extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}; // = {name: "", moviequestion: false, moviename: ""};
+    this.state = {};
     this.handleNameInput = this.handleNameInput.bind(this);
     this.handleChoice = this.handleChoice.bind(this);
     this.handleMovieInput = this.handleMovieInput.bind(this);
@@ -31,12 +31,25 @@ class Details extends React.Component {
 
   handleSave(selected) {
     console.log('save to db here');
-    console.log({"name": this.state.name, "moviename": this.state.moviename});
-    var data = {"name": this.state.name, "moviename": this.state.moviename};
+    var data = '{"name": "' + this.state.name + '", "moviename": "' + this.state.moviename + '"}';
+    console.log(data)
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/visitors', data);
+    xhr.open('POST', 'http://localhost:3000/visitors', true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.send();
+    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    xhr.send(data);
+
+    xhr.onreadystatechange = function () {
+      var DONE = 4; // readyState 4 means the request is done.
+      var OK = 201; // status 201 means entry was successfully created
+      if (xhr.readyState === DONE) {
+        if (xhr.status === OK) {
+          console.log(xhr.responseText); // 'This is the returned text.'
+        } else {
+          console.log('Error: ' + xhr.status); // An error occurred during the request.
+        }
+      }
+    }
   }
 
   render() {

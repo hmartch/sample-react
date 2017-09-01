@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "body-parser": "1.10.2",
+    "cors": "^2.8.4",
     "express": "^4.13.3",
     "express-validator": "2.8.0",
     "history": "^3.2.1",
@@ -66,7 +67,7 @@
     "watch:css": "node-sass -w src/stylesheets/main.css.scss public/stylesheets/main.css",
     "watch": "echo 'Will watch for changes...'; npm run watch:js & npm run watch:css",
     "build:localhost": "for step in 'assets' 'js-dev' 'css-dev' 'html'; do npm run build:$step; done; echo 'Localhost dev build complete'",
-    "start:localhost": "echo 'Running server in localhost dev mode'; node server.js;",
+    "start:localhost": "echo 'Running servers in localhost dev mode'; node server.js & node server_db.js;",
     "localhost": "npm run build:localhost && (npm run start:localhost & npm run watch)",
     "build:prod": "for step in 'assets' 'js' 'css' 'mark' 'html'; do npm run build:$step; done; echo 'Prod build complete'",
     "start:prod": "echo 'Running server in production mode'; NODE_ENV=production node server.js",
