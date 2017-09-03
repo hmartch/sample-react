@@ -17,7 +17,9 @@ NOTE: This repository is a work-in-progress.
 
 5. To build and start the server in Production mode: Use command `npm run prod` at root, which will also minify both js and css, and add MD5 hashes to asset files for cache-busting.
 
-6. Server runs at 127.0.0.1:3002 (localhost:3002).
+6. Server runs at 127.0.0.1:2000 (localhost:2000).
+
+Note: To reset the BASE_API_URL in AppConstants.js file to the initial state, especially for before committing code updates to the repository, use command `npm run set-api-url:init` at root.
 
 ## Edit in pre-process files, not the generated files
 The following files are the ones to edit:

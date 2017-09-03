@@ -1,0 +1,4 @@
+{
+  "http://localhost:3000": "%BASE_API_URL%",
+  "production": "%BASE_API_URL%"
+}

@@ -50,8 +50,11 @@
     "watchify": "^3.6.1"
   },
   "scripts": {
-    "prebuild:localhost": "rm -rf public && mkdir public",
-    "prebuild:prod": "rm -rf public && mkdir public",
+    "set-api-url:init": "replaceinfiles -r 'config/config_init.json' -S -s 'src/js/constants/AppConstants.js'",
+    "set-api-url:localhost": "replaceinfiles -r 'config/config_localhost.json' -S -s 'src/js/constants/AppConstants.js'",
+    "set-api-url:prod": "replaceinfiles -r 'config/config_production.json' -S -s 'src/js/constants/AppConstants.js'",
+    "prebuild:localhost": "npm run set-api-url:init && rm -rf public  && (mkdir public && npm run set-api-url:localhost)",
+    "prebuild:prod": "npm run set-api-url:init && rm -rf public && (mkdir public && npm run set-api-url:prod)",
     "bundle:js": "mkdir public/js && NODE_ENV=production browserify -t babelify src/js/app.js -o public/js/bundle.js",
     "minify:js": "uglifyjs public/js/bundle.js --compress warnings=false --mangle -o public/js/bundle.min.js && rm public/js/bundle.js",
     "build:js": "npm run bundle:js && npm run minify:js",
@@ -67,10 +70,10 @@
     "watch:css": "node-sass -w src/stylesheets/main.css.scss public/stylesheets/main.css",
     "watch": "echo 'Will watch for changes...'; npm run watch:js & npm run watch:css",
     "build:localhost": "for step in 'assets' 'js-dev' 'css-dev' 'html'; do npm run build:$step; done; echo 'Localhost dev build complete'",
-    "start:localhost": "echo 'Running servers in localhost dev mode'; node server.js & node server_db.js;",
+    "start:localhost": "echo 'Running servers in localhost dev mode'; node server_db.js & node server.js;",
     "localhost": "npm run build:localhost && (npm run start:localhost & npm run watch)",
     "build:prod": "for step in 'assets' 'js' 'css' 'mark' 'html'; do npm run build:$step; done; echo 'Prod build complete'",
-    "start:prod": "echo 'Running server in production mode'; NODE_ENV=production node server.js",
+    "start:prod": "echo 'Running servers in production mode'; NODE_ENV=production node server_db.js & NODE_ENV=production node server.js",
     "prod": "npm run build:prod && npm run start:prod",
     "test": "jest",
     "test-dev": "jest -o"

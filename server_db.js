@@ -14,7 +14,13 @@ db_app.use(cors());
 var postgres = require('./lib/postgres');
 
 // Your database configuration
-var DATABASE_URL = 'postgres://helen:dbpass@localhost:5432/simple_db';
+if (db_app.get('env') === 'development') {
+  var DATABASE_URL = 'postgres://helen:dbpass@localhost:5432/simple_db';
+}
+else {
+  console.log('TO DO: Configure production database url');
+  //var DATABASE_URL = '';
+}
 
 // Connect to mysql database
 postgres.initialize(DATABASE_URL, function(err) {

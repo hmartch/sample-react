@@ -1,5 +1,7 @@
 import React from 'react';
 
+var AppConstants = require('../constants/AppConstants');
+
 class Details extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +39,8 @@ class Details extends React.Component {
   handleSave(selected) {
     var data = '{"name": "' + this.state.name + '", "moviename": "' + this.state.moviename + '"}';
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3000/visitors', true);
+    var url = AppConstants.BASE_API_URL + '/visitors';
+    xhr.open('POST', url, true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
     xhr.send(data);
