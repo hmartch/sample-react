@@ -50,9 +50,9 @@ class Details extends React.Component {
       var OK = 201; // status 201 means entry was successfully created
       if (xhr.readyState === DONE) {
         if (xhr.status === OK) {
-          console.log(xhr.responseText); // 'This is the returned text.'
+          //console.log(xhr.responseText); // 'This is the returned text.'
         } else {
-          console.log('Error: ' + xhr.status); // An error occurred during the request.
+          //console.log('Error: ' + xhr.status); // An error occurred during the request.
         }
       }
     }
@@ -107,12 +107,12 @@ class Details extends React.Component {
         if (xhr.readyState === DONE) {
           if (xhr.status === OK) {
             var parsed = JSON.parse(xhr.responseText);
-            console.log(parsed.results[0]);
+            //console.log(parsed.results[0]);
             document.getElementById('movie-title').append(parsed.results[0].title);
             document.getElementById('movie-descrip').append(parsed.results[0].overview);
             document.getElementById('movie-poster').setAttribute('src', 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + parsed.results[0].poster_path);
           } else {
-            console.log('Error: ' + xhr.status); // An error occurred during the request.
+            //console.log('Error: ' + xhr.status); // An error occurred during the request.
           }
         }
       }

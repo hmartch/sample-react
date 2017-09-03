@@ -18,7 +18,6 @@ if (db_app.get('env') === 'development') {
   var portNum = 3000;
 }
 else {
-  console.log('TO DO: Configure production database url');
   var DATABASE_URL = 'postgres://helen:dbpass@localhost:5432/simple_db';
   var portNum = 4000;
 }
