@@ -13,13 +13,23 @@ NOTE: This repository is a work-in-progress.
 
 3. Use command `npm install` at root to install the necessary dependencies (refer to package.json for what's included).
 
-4. To build and start the server in Localhost-Development mode: Use command `npm run localhost` at root, which will also initiate watching and continuous updating of js and css code changes (allowing a simple browser refresh to see changes).
+4. To build and start the server in Localhost-Development mode: Use command `npm run localhost` at root, which will also initiate watching and continuous updating of js and css code changes (allowing a simple browser refresh to see changes), and set the BASE_API_URL for the local dev environment (see below notes on Database setup).
 
-5. To build and start the server in Production mode: Use command `npm run prod` at root, which will also minify both js and css, and add MD5 hashes to asset files for cache-busting.
+5. To build and start the server in Production mode: Use command `npm run prod` at root, which will also minify both js and css, add MD5 hashes to asset files for cache-busting, and set the BASE_API_URL for the production environment (see below notes on Database setup).
 
 6. Server runs at 127.0.0.1:2000 (localhost:2000).
 
 Note: To reset the BASE_API_URL in AppConstants.js file to the initial state, especially for before committing code updates to the repository, use command `npm run set-api-url:init` at root.
+
+## Database setup
+
+1. Create a PostGreSQL database with a table as defined in the included `database.sql` file.
+
+2. In `server_db.js` modify the DATABASE_URL values for development and production environments to use the appropriate db user, password and db name. Eg. `postgres://[user]:[pass]@localhost:5432/[db_name]` for each environment.
+
+3. In `server_db.js` modify the portNum variable for the port numbers for the http address of your database api server as needed.
+
+4. Modify the individual config files in the `config` directory to use the appropriate http addresses of your database api server. These are used in the build process to set variables.
 
 ## Edit in pre-process files, not the generated files
 The following files are the ones to edit:
