@@ -5,7 +5,6 @@ var expressValidator = require('express-validator');
 var cors = require('cors');
 
 var db_app = express();
-var portNum = 3000;
 
 db_app.use(bodyParser.json({ type: 'application/json' }));
 db_app.use(expressValidator());
@@ -16,10 +15,12 @@ var postgres = require('./lib/postgres');
 // Your database configuration
 if (db_app.get('env') === 'development') {
   var DATABASE_URL = 'postgres://helen:dbpass@localhost:5432/simple_db';
+  var portNum = 3000;
 }
 else {
   console.log('TO DO: Configure production database url');
-  //var DATABASE_URL = '';
+  var DATABASE_URL = 'postgres://helen:dbpass@localhost:5432/simple_db';
+  var portNum = 4000;
 }
 
 // Connect to mysql database
