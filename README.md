@@ -1,6 +1,6 @@
 # sample-react
 
-NOTE: This repository is a work-in-progress.
+A simple, sample site using React.  Give your name, answer whether you have a favorite movie, if you do then say what it is. If you have given a favorite movie and allow your answers to be saved, the app will thank you and display the description and poster image of the movie.
 
 ## To use this repository
 1. Clone the repository
